@@ -928,27 +928,6 @@ const App: React.FC = () => {
         language={language}
       />
       <main className="flex-1 flex flex-col overflow-y-auto min-w-0">
-        {/* Announcement Ticker */}
-        {announcements.length > 0 && (
-            <div className="bg-yellow-300 text-yellow-900 px-4 py-2 text-sm font-medium overflow-hidden relative whitespace-nowrap border-b border-yellow-400 shadow-sm z-20">
-                <div className="animate-marquee inline-block">
-                    {announcements.map((ann, index) => (
-                        <span key={ann.id} className="mx-8">
-                            <span className="font-bold uppercase text-xs bg-yellow-800 text-yellow-100 px-1.5 py-0.5 rounded mr-2">{ann.category}</span>
-                            {ann.title}: {ann.content}
-                        </span>
-                    ))}
-                    {/* Duplicate content to ensure smooth loop if screen is wide */}
-                    {announcements.map((ann, index) => (
-                        <span key={`${ann.id}-dup`} className="mx-8">
-                            <span className="font-bold uppercase text-xs bg-yellow-800 text-yellow-100 px-1.5 py-0.5 rounded mr-2">{ann.category}</span>
-                            {ann.title}: {ann.content}
-                        </span>
-                    ))}
-                </div>
-            </div>
-        )}
-
         {/* Header */}
         <header className="flex items-center justify-between p-2 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 sticky top-0 z-10">
           <div className="flex items-center gap-2">
@@ -986,6 +965,28 @@ const App: React.FC = () => {
               />
           </div>
         </header>
+
+        {/* Announcement Ticker */}
+        {activeView === 'home' && announcements.length > 0 && (
+            <div className="bg-yellow-300 text-yellow-900 px-4 py-2 text-sm font-medium overflow-hidden relative whitespace-nowrap border-b border-yellow-400 shadow-sm z-0">
+                <div className="animate-marquee inline-block">
+                    {announcements.map((ann, index) => (
+                        <span key={ann.id} className="mx-8">
+                            <span className="font-bold uppercase text-xs bg-yellow-800 text-yellow-100 px-1.5 py-0.5 rounded mr-2">{ann.category}</span>
+                            {ann.title}: {ann.content}
+                        </span>
+                    ))}
+                    {/* Duplicate content to ensure smooth loop if screen is wide */}
+                    {announcements.map((ann, index) => (
+                        <span key={`${ann.id}-dup`} className="mx-8">
+                            <span className="font-bold uppercase text-xs bg-yellow-800 text-yellow-100 px-1.5 py-0.5 rounded mr-2">{ann.category}</span>
+                            {ann.title}: {ann.content}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        )}
+
         {notification && <NotificationBanner message={notification} onDismiss={() => setNotification(null)} />}
         <div className="flex-1 p-4 md:p-8">
           {PageContent}
